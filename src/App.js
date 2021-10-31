@@ -1,8 +1,8 @@
 //import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react'
-// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-// import About from './components/About';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
@@ -21,13 +21,24 @@ function App() {
         }, 1500);
     }
 
+    // const removeBodyClasses = ()=>{
+    //     // document.body.classList.remove('bg-light');
+    //     // document.body.classList.remove('bg-success');
+    //     // document.body.classList.remove('bg-warning');
+    //     // document.body.classList.remove('bg-info');
+    //     // document.body.classList.remove('bg-primary');
+    //     // document.body.classList.remove('bg-danger');
+    // }
 
-    const toggleMode = () => {
+    const toggleMode = (cls) => {
+        // removeBodyClasses();
+        // console.log(cls)
+        // document.body.classList.add('bg-'+cls);
         if (mode === 'light') {
             setMode('dark');
             document.body.style.backgroundColor = '#042743';
             showAlert("Dark Mode has been ON", "success");
-            document.title = "TextUtils-DarkMode";
+            // document.title = "TextUtils-DarkMode";
             // setInterval(() => {
             //     document.title="TextUtils is amazing app";
             // }, 2000);
@@ -39,27 +50,27 @@ function App() {
             setMode('light');
             document.body.style.backgroundColor = 'white';
             showAlert("Light Mode has been On", "success");
-            document.title = "TextUtils-LightMode";
+            // document.title = "TextUtils-LightMode";
         }
     }
     return (
-        //<Router>
+        <Router>
             <div>
                 <Navbar title="React Text Utils" mode={mode} toggleMode={toggleMode} />
                 <Alert alert={alert} />
                 {/* <Navbar/> */}
                 <div className="container">
-                    {/* <Switch>
+                    <Switch>
                         <Route exact path="/about">
-                            <About />
+                            <About mode={mode}/>
                         </Route>
-                        <Route exact path="/"> */}
-                            <TextForm showAlert={showAlert} heading="Enter The Text To Analyze" mode={mode} />
-                        {/* </Route>
-                    </Switch> */}
+                        <Route exact path="/">
+                            <TextForm showAlert={showAlert} heading="Try TextUtils- Word Counter, Character Counter, Remove Extra Spaces, Convert Cases" mode={mode} />
+                        </Route>
+                    </Switch>
                 </div>
             </div>
-        //</Router>
+        </Router>
     );
 }
 
